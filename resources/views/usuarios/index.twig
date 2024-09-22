@@ -1,0 +1,39 @@
+{% extends "layout.twig" %}
+
+{% block title %}Usuarios{% endblock %}
+
+{% block content %}
+    <h1>Usuarios</h1>
+    {% if auth.user.role_id == 1 %}
+        <a href="/usuarios/create">Crear nuevo usuario</a>
+    {% endif %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.role_id }}</td>
+                    <td>
+                        <a href="/usuarios/edit/{{ usuario.id }}">Editar</a>
+                        {% if auth.user.role_id == 1 %}
+                            <form action="/usuarios/delete/{{ usuario.id }}" method="POST" onsubmit="return confirm('¿Estás seguro?');">
+                                <button type="submit">Eliminar</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

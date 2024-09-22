@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestión de Activos{% endblock %}</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                {% if auth.check %}
+                    <li><a href="/empresas">Empresas</a></li>
+                    <li><a href="/subempresas">Sub-empresas</a></li>
+                    <li><a href="/departamentos">Departamentos</a></li>
+                    <li><a href="/equipos">Equipos</a></li>
+                    <li><a href="/usuarios">Usuarios</a></li>
+                    <li><a href="/logout">Cerrar sesión</a></li>
+                {% else %}
+                    <li><a href="/login">Iniciar sesión</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Gestión de Activos</p>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
